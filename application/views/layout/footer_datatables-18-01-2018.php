@@ -1,7 +1,7 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            &copy; <a href="http://www.uin.ar-raniry.ac.id/">UIN AR-Raniry</a>
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -62,6 +62,27 @@
                     e.preventDefault();
             });
 
+//Ajax Update
+    function saveToDBs()
+        {
+                console.log('Saving to the db');
+                form = $('.contact-forms');
+                    $.ajax({
+                            url: "<?php echo base_url(); ?>Pegawai/UpdateProfilPegawai",
+                            type: "POST",
+                            data: form.serialize(),
+                            success: function (response) {
+                                $("#testDIVs").html(response);
+                                document.location.reload();
+                            },
+                    });
+        }
+        $('.contact-forms').submit(function(e) {
+                    saveToDBs();
+                    e.preventDefault();
+        });
+
+
 // Dropdown Insert
         function seljabatan()
         {
@@ -86,13 +107,13 @@
                     },
                     function(data)
                         {
-                            $('.id_unit_kerja').html(data);
+                            $('#id_unit_kerja').html(data);
                         });
         }
 
         function selsatuankerja()
         {
-           var state=$('.id_unit_kerja').val();
+           var state=$('#id_unit_kerja').val();
                 $.post('<?php echo base_url();?>Pegawai/ambil_satuankerja/',
                     {
                         state:state
@@ -134,12 +155,7 @@
         $(function() {
             $('#row_dims').hide();
             $('.types').change(function(){
-              var mystr =$('.types').val();
-              var myarr = mystr.split('#');
-              var myvar = myarr[0];
-              //alert(myvar);
-                 if(myvar == '5') {
-                 //if($('.types').val() == '5') {
+                if($('.types').val() == '5') {
                     $('#row_dims').show();
                 } else {
                     $('#row_dims').hide();
@@ -151,11 +167,7 @@
         $(function() {
             $('#row_dims1').hide();
             $('.types1').change(function(){
-              var mystr =$('.types1').val();
-              var myarr = mystr.split('#');
-              var myvar = myarr[0];
-
-                if(myvar == '5') {
+                if($('.types1').val() == '5') {
                     $('#row_dims1').show();
                 } else {
                     $('#row_dims1').hide();
@@ -228,26 +240,6 @@
                             $('#id_jfu1').html(data);
                         });
         }
-
-        //Ajax Update
-            function saveToDBs()
-                {
-                        console.log('Saving to the db');
-                        form = $('.contact-forms');
-                            $.ajax({
-                                    url: "<?php echo base_url(); ?>Pegawai/UpdateProfilPegawai",
-                                    type: "POST",
-                                    data: form.serialize(),
-                                    success: function (response) {
-                                        $("#testDIVs").html(response);
-                                        document.location.reload();
-                                    },
-                            });
-                }
-                $('.contact-forms').submit(function(e) {
-                            saveToDBs();
-                            e.preventDefault();
-                });
 
     </script>
   </body>

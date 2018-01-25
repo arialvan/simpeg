@@ -6,36 +6,15 @@ class M_pegawai extends CI_Model{
         parent::__construct();
     }
 
-// WEB SERVICE
-    function show_pegawai_service(){
-      $this->db->select('nip,nama_peg,alamat')
-               ->from('tb_pegawai');
-      $query = $this->db->get()->result();
-      return $query;
-    }
-
-    function show_pegawai_services($where,$table){
-        //return $this->db->get_where($table,$where);
-        $this->db->select('nip,nama_peg,alamat');
-        $query=$this->db->get_where($table,$where);
-        return $query;
-
-    }
-
 /*PEGAWAI*/
     function show_pegawai(){
-      $this->db->select('*')
-                      ->from('tb_pegawai')
-                      ->where('nip !=', 007)
-                      ->order_by('nip');
-      $query=$this->db->get()->result();
-      return $query;
+        $query = $this->db->get('tb_pegawai')->result();
+        return $query;
     }
 
     function show_pegawai_setting(){
         $this->db->select('nip,nama_peg,status_peg,status_profesi,status_profil')
-                 ->from('tb_pegawai')
-                 ->where('nip !=', 007);
+                 ->from('tb_pegawai');
         $query = $this->db->get()->result();
         return $query;
     }
@@ -57,12 +36,8 @@ class M_pegawai extends CI_Model{
  /*PEGAWAI VIEWS*/
 
     function show_viewpages(){
-      $this->db->select('*')
-                      ->from('pegview')
-                      ->where('nip !=', 007)
-                      ->order_by('nip');
-      $query=$this->db->get()->result();
-      return $query;
+        $query = $this->db->get('pegview')->result();
+        return $query;
     }
 
     function show_viewpages_edit($where,$table){
@@ -91,8 +66,8 @@ class M_pegawai extends CI_Model{
 /*UPDATE PEGAWAI*/
     function update_pegawai($where,$data,$table){
         $msg = '<i class="fa fa-check text-success"></i> Simpan Data Berhasil';
-      	$this->db->where($where);
-      	$this->db->update($table,$data);
+	$this->db->where($where);
+	$this->db->update($table,$data);
         if($this->db->affected_rows() < 1 ){
             $msg = '<i class="fa fa-close text-danger"></i> Simpan data gagal.';
         }
@@ -100,14 +75,14 @@ class M_pegawai extends CI_Model{
     }
 /*UPDATE PEGAWAI PROFIL*/
     function update_pegawai_profil($where,$data,$table){
-            	$this->db->where($where);
-            	$this->db->update($table,$data);
+	$this->db->where($where);
+	$this->db->update($table,$data);
     }
 
 /*UPDATE PEGAWAI ATASAN*/
     function update_pegawai_atasan($where,$data,$table){
-    	$this->db->where($where);
-    	$this->db->update($table,$data);
+	$this->db->where($where);
+	$this->db->update($table,$data);
     }
 /*HAPUS DATA PEGAWAI*/
     function hapus_pegawai($where,$table){
@@ -132,12 +107,13 @@ class M_pegawai extends CI_Model{
     }
 /* RIWAYAT JABATAN JOIN JABATAN */
     function riwayatjabatan($id){
-        $this->db->select('tb_riwayatjabatan_pegawai.id_riwayat_jabatan,tb_riwayatjabatan_pegawai.nip,tb_riwayatjabatan_pegawai.id_jabatan,YEAR(tb_riwayatjabatan_pegawai.tgl_riwayat) AS Tahun,tb_jabatan_struktural.jabatan_struktural');
-        $this->db->from('tb_riwayatjabatan_pegawai');
-        $this->db->join('tb_jabatan_struktural', 'tb_jabatan_struktural.id_jabatan = tb_riwayatjabatan_pegawai.id_jabatan');
+        $this->db->select('*');
+        $this->db->from('tb_riwayatjabatan');
+        $this->db->join('tb_jabatan_struktural', 'tb_jabatan_struktural.id_jabatan = tb_riwayatjabatan.id_jabatan');
         //$this->db->join('tb_pegawai', 'tb_pegawai.nip = tb_riwayatjabatan.nip','left');
-        $this->db->where('tb_riwayatjabatan_pegawai.nip', $id);
+        $this->db->where('tb_riwayatjabatan.nip', $id);
         $query = $this->db->get()->result();
+
         return $query;
     }
 /* RIWAYAT DIKLAT*/
@@ -205,54 +181,39 @@ class M_pegawai extends CI_Model{
 
         public function ambil_tb_unitkerja()
         {
-            $state          = $this->input->post("state");
-            $ex             = explode('#',$state);
-            $id_jabatan     = $ex[0];
-            $id_unit        = $ex[1];
+            $state  = $this->input->post("state");
+            $ex     = explode('#',$state);
+            $idjab  = $ex[0];
+            $idunit = $ex[1];
 
             $sql="select * FROM tb_kelompok_organisasi join tb_unit_kerja on tb_kelompok_organisasi.id_unit_kerja=tb_unit_kerja.id_unit_kerja
-                  where tb_kelompok_organisasi.id_jabatan ='$id_jabatan' and tb_kelompok_organisasi.id_unit='$id_unit'
-                  group by tb_kelompok_organisasi.id_unit_kerja ";
+                  where tb_kelompok_organisasi.id_unit='$idunit' and  tb_kelompok_organisasi.id_jabatan ='$idjab'
+                  group by tb_kelompok_organisasi.id_unit_kerja"; //tb_kelompok_organisasi.id_unit='$idunit' and
             $query=$this->db->query($sql);
             return $query;
         }
 
         public function ambil_tb_satuankerja()
         {
-            $state          = $this->input->post("state");
-            $ex             = explode('#',$state);
-            $id_unit_kerja  = $ex[0];
-            $id_unit        = $ex[1];
-            $id_jabatan     = $ex[2];
+            $state  = $this->input->post("state");
+            $ex     = explode('#',$state);
+            $idjab  = $ex[0];
+            $idunit = $ex[1];
+
             $sql="select * FROM tb_kelompok_organisasi join tb_satuan_kerja on tb_kelompok_organisasi.id_satuan_kerja=tb_satuan_kerja.id_satuan_kerja
-                    where tb_kelompok_organisasi.id_unit_kerja ='$id_unit_kerja' and tb_kelompok_organisasi.id_unit='$id_unit'
-                    and tb_kelompok_organisasi.id_jabatan='$id_jabatan'
-                    group by tb_kelompok_organisasi.id_satuan_kerja "; //
+                  where tb_kelompok_organisasi.id_unit='$idunit' and tb_kelompok_organisasi.id_unit_kerja ='$idjab'
+                  group by tb_kelompok_organisasi.id_satuan_kerja";
             $query=$this->db->query($sql);
             return $query;
         }
 
         public function ambil_tb_jfu()
         {
-            $state          = $this->input->post("state");
-            $ex             = explode('#',$state);
-            $id_satuan_kerja= $ex[0];
-            $id_unit        = $ex[2];
+            $state=$this->input->post("state");
             $sql="select * FROM tb_kelompok_organisasi join tb_jabatan_jfu on tb_kelompok_organisasi.id_jfu=tb_jabatan_jfu.id_jfu
-                  where tb_kelompok_organisasi.id_satuan_kerja ='$id_satuan_kerja'
-                  and tb_kelompok_organisasi.id_unit ='$id_unit'
-                  order by tb_kelompok_organisasi.id_jfu ";
+            where tb_kelompok_organisasi.id_satuan_kerja ='$state'";
             $query=$this->db->query($sql);
             return $query;
         }
-
-/*EDIT AND UPDATE PASSWORD */
-function edit_password($where,$table){
-    return $this->db->get_where($table,$where);
-}
-function update_password($where,$data,$table){
-        	$this->db->where($where);
-        	$this->db->update($table,$data);
-}
 
 }

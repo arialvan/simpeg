@@ -22,7 +22,6 @@
                           <th>Nip</th>
                           <th>Nama</th>
                           <th>Set Unit Kerja</th>
-                          <th>Set Atasan</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -45,13 +44,6 @@
                                     <a data-toggle="modal" data-id="<?php echo $dt->nip; ?>" data-toggle="modal" title="Add this item" class="open-AddBookDialogs btn btn-info" href="#addBookDialogs">Update Unit</a>
                               <?php } ?>
                           </td>
-                          <td>
-                              <?php if($dt->status_atasan==0){ ?>
-                                    <a data-toggle="modal" data-id="<?php echo $dt->nip; ?>" data-toggle="modal" title="Add this item" class="open-Atasan btn btn-danger" href="#setatasan">Set Atasan</a>
-                              <?php }else{ ?>
-                                    <a data-toggle="modal" data-id="<?php echo $dt->nip; ?>" data-toggle="modal" title="Add this item" class="open-EditAtasan btn btn-info" href="#editatasan">Update Atasan</a>
-                              <?php } ?>
-                          </td>
                         </tr>
                         <?php } ?>
                       </tbody>
@@ -59,6 +51,8 @@
                     <div id="response"></div>
                   </div>
                   <div class="clearfix"></div>
+
+<!-- MODAL INSERT PROFIL PEGAWAI -->
                   <div class="modal fade" id="addBookDialog" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
@@ -91,6 +85,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Eselon<span class="required">*</span></label>
@@ -103,6 +98,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Golongan<span class="required">*</span></label>
@@ -111,18 +107,6 @@
                                             <?php foreach ($golongan as $g){ ?>
                                                  <option value="<?php echo $g->id_gol; ?>"><?php echo $g->nama_golongan; ?></option>
                                             <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User Level<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="user_level" id="user_level" class="form-control col-md-7 col-xs-12" required>
-                                                 <option value="">-- Pilih --</option>
-                                                 <option value="2">-- Dosen --</option>
-                                                 <option value="3">-- Pegawai --</option>
                                         </select>
                                     </div>
                                 </div>
@@ -153,7 +137,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_jabatan" id="id_jabatan" class="form-control col-md-7 col-xs-12" onchange="selunitkerja()">
+                                        <select name="id_jabatan" id="id_jabatan" class="form-control col-md-7 col-xs-12 types" onchange="selunitkerja()">
                                             <option value="">- Pilih Jabatan  - </option>
                                         </select>
                                     </div>
@@ -174,12 +158,24 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Satuan Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_satuan_kerja" id="id_satuan_kerja" class="form-control col-md-7 col-xs-12">
+                                        <select name="id_satuan_kerja" id="unitkerja" class="form-control col-md-7 col-xs-12" onchange="seljfu()">
 
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="row_dims" class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">JFU<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="id_jfu" id="id_jfu" class="form-control col-md-7 col-xs-12">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <br />
                             <h3 class="alert-success" id="testDIV"></h3>
                             <div class="modal-footer">
@@ -192,6 +188,7 @@
                     </div>
                   </div>
 
+<!-- MODAL UPDATE PROFIL PEGAWAI -->
                   <div class="modal fade" id="addBookDialogs" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
@@ -199,7 +196,7 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                           </button>
-                          <h4 class="modal-title" id="myModalLabel">Insert Profil Pegawai</h4>
+                          <h4 class="modal-title" id="myModalLabel">Update Profil Pegawai</h4>
                         </div>
                           <form class="contact-forms" method="post" >
                             <div class="modal-body">
@@ -236,18 +233,6 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_jabatan" id="id_jabatan" class="form-control col-md-7 col-xs-12">
-                                            <?php foreach ($jabatan as $j){ ?>
-                                                 <option value="<?php echo $j->id_jabatan; ?>"><?php echo $j->jabatan_struktural; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pendidikan Terakhir<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_pendidikan" id="id_pendidikan" class="form-control col-md-7 col-xs-12">
@@ -258,11 +243,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <br /><br />
+                            <div class="line line-block"></div>
+                            <div class="form-group">
+                                <h4 class="modal-title" id="myModalLabel">Kelompok Organisasi</h4>
+                                <hr />
+                            </div>
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Organisasi<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_unit" id="id_unit" class="form-control col-md-7 col-xs-12">
+                                        <select name="id_unit" id="id_unit1" class="form-control col-md-7 col-xs-12" onchange="seljabatan1()">
+                                            <option value="">-- Pilih Unit --</option>
                                             <?php foreach ($unit as $u){ ?>
                                                  <option value="<?php echo $u->id_unit; ?>"><?php echo $u->unit_organisasi; ?></option>
                                             <?php } ?>
@@ -270,14 +263,24 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="id_jabatan" id="id_jabatan1" class="form-control col-md-7 col-xs-12 types1" onchange="selunitkerja1()">
+                                            <option value="">- Pilih Jabatan  - </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_unit_kerja" id="id_unit_kerja" class="form-control col-md-7 col-xs-12">
-                                            <?php foreach ($unitkerja as $uk){ ?>
-                                                 <option value="<?php echo $uk->id_unit_kerja; ?>"><?php echo $uk->unit_kerja; ?></option>
-                                            <?php } ?>
+                                        <select name="id_unit_kerja" class="id_unit_kerja1 form-control col-md-7 col-xs-12" onchange="selsatuankerja1()">
+
                                         </select>
                                     </div>
                                 </div>
@@ -286,14 +289,24 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Satuan Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_satuan_kerja" id="id_satuan_kerja" class="form-control col-md-7 col-xs-12">
-                                            <?php foreach ($satuankerja as $sk){ ?>
-                                                 <option value="<?php echo $sk->id_satuan_kerja; ?>"><?php echo $sk->satuan_kerja; ?></option>
-                                            <?php } ?>
+                                        <select name="id_satuan_kerja" id="unitkerja1" class="id_unit_kerja unitkerja form-control col-md-7 col-xs-12" onchange="seljfu1()">
+
                                         </select>
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="row_dims1" class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">JFU<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="id_jfu" id="id_jfu1" class="form-control col-md-7 col-xs-12">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <br />
                             <h3 class="alert-info" id="testDIVs"></h3>
                             <div class="modal-footer">
@@ -305,87 +318,6 @@
                       </div>
                     </div>
                   </div>
-
-<!-- MODAL SET ATASAN  -->
-                  <div class="modal fade" id="setatasan" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Setting Atasan Pegawai</h4>
-                        </div>
-                          <form class="atasan-forms" method="post" >
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">NIP<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="nip" id="idAtasan" disabled="disabled" class="form-control col-md-7 col-xs-12">
-                                        <input type="hidden" name="nip" id="idAtasan" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Atasan<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="atasan" autocomplete="off" name="atasan" class="form-control" placeholder="Ketikan Nama Pegawai">
-                                        <ul class="dropdown-menu txtcountry" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="DropdownCountry"></ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <h3 class="alert-info" id="testDIVatasan"></h3>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <input type="submit" class="btn btn-primary" value="Save" />
-                            </div>
-                        </form>
-                        <div class="form-status-holder"></div>
-                      </div>
-                    </div>
-                  </div>
-
-<!-- MODAL EDIT ATASAN  -->
-                  <div class="modal fade" id="editatasan" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Edit Atasan Pegawai</h4>
-                        </div>
-                          <form class="edit-atasanforms" method="post" >
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">NIP<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="nip" id="idEditAtasan" class="form-control col-md-7 col-xs-12">
-                                        <input type="hidden" name="nip" id="idEditAtasan" required="required" class="form-control col-md-7 col-xs-12">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Atasan<span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" id="EditAtasanPeg" autocomplete="off" name="EditAtasanPeg" class="form-control" placeholder="Ketikan Nama Pegawai">
-                                        <ul class="dropdown-menu txtnama" style="margin-left:15px;margin-right:0px;" role="menu" aria-labelledby="dropdownMenu"  id="dropdownnama"></ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <br />
-                            <h3 class="alert-info" id="testDIVeditatasan"></h3>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <input type="submit" class="btn btn-primary" value="Save" />
-                            </div>
-                        </form>
-                        <div class="form-status-holder"></div>
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
               </div>
 

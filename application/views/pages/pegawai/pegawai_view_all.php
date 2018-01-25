@@ -28,9 +28,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php 
+                        <?php
                         $no = 1;
-                        foreach($pegawai as $dt){ 
+                        foreach($pegawai as $dt){
                             if($dt->status_profesi==1){
                                 $prof="JFU";
                             }elseif($dt->status_profesi==2){
@@ -42,7 +42,7 @@
                             }else{
                                 $prof="-";
                             }
-                            
+
                             if($dt->status_peg==1){
                                 $peg="PNS";
                             }else{
@@ -58,8 +58,10 @@
                           <td><?php echo $prof ?></td>
                           <td>
                               <?php echo anchor('Pegawai/ProfilPegawai/'.$dt->nip,'<span class="glyphicon glyphicon-arrow-right" title="Detil Data"></span>'); ?> |
+                              <?php if($level==1){ ?>
                               <?php echo anchor('Pegawai/EditPegawai/'.$dt->nip,'<span class="glyphicon glyphicon-pencil" title="Edit Data"></span>'); ?> |
                               <?php echo anchor('Pegawai/HapusPegawai/'.$dt->nip,'<span class="glyphicon glyphicon-remove" title="Hapus Data"></span>'); ?>
+                              <?php } ?>
                           </td>
                         </tr>
                         <?php } ?>
@@ -71,4 +73,3 @@
               </div>
           </div>
    </div>
-

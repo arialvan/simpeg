@@ -3,16 +3,22 @@
               <div class="menu_section">
                 <h3><u>General</u></h3>
                 <ul class="nav side-menu">
+                  <li><a href="<?php echo base_url() ?>Dashboard"><i class="fa fa-dashboard"></i> Dashboard </a></li>
+                </ul>
+                <ul class="nav side-menu">
                   <li><a><i class="fa fa-users"></i> Data Pegawai <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <?php if($this->session->userdata('user_level')==1) { ?>
                         <li><a href="<?php echo base_url() ?>Pegawai/PegawaiAll">Pegawai All</a></li>
+                      <?php } ?>
                         <li><a href="<?php echo base_url() ?>Pegawai">Pegawai Profil</a></li>
                     </ul>
-                  </li>    
+                  </li>
                 </ul>
               </div>
+              <?php if($this->session->userdata('user_level')==1) { ?>
               <div class="menu_section">
-                  <h3><u>Insert Data</u></h3>
+              <h3><u>Insert Data</u></h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-plus"></i>Master<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
@@ -36,9 +42,8 @@
                     </ul>
                   </li>
                 </ul>
-                
               </div>
-
+              <?php } ?>
             </div>
             <!-- /sidebar menu -->
             <!-- /menu footer buttons -->
@@ -46,8 +51,9 @@
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url() ?>Login/logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
-            <!-- /menu footer buttons -->
+              <?php echo anchor('Pegawai/PegawaiPassword/'.$this->session->userdata('nipp'),'<span class="glyphicon glyphicon-wrench" title="Detil Data"></span>'); ?>
+              </div>
+          <!-- /menu footer buttons -->
           </div>
         </div>
 
@@ -66,6 +72,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="<?php echo base_url('Pegawai/PegawaiPassword/'.$this->session->userdata('nipp')) ?>"> <i class="fa fa-key pull-right"></i>Update Password</a></li>
                     <li><a href="<?php echo base_url() ?>Login/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

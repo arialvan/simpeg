@@ -1,14 +1,14 @@
 <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            &copy; <a href="http://www.uin.ar-raniry.ac.id/">UIN AR-Raniry</a>
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
       </div>
     </div>
-        
+
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -20,12 +20,12 @@
     <!-- bootstrap-daterangepicker -->
     <script src="<?php echo base_url(); ?>assets/vendors/moment/min/moment.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap-datetimepicker -->    
+    <!-- bootstrap-datetimepicker -->
     <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/build/js/custom.min.js"></script>
-            
+
     <script>
         $('#myDatepicker2').datetimepicker({
             format: 'YYYY.MM.DD'
@@ -37,7 +37,7 @@
             format: 'YYYY.MM.DD'
         });
     </script>
-    
+
 
 </body>
 </html>

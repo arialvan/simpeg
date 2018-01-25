@@ -32,9 +32,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php 
+                        <?php
                         $no = 1;
-                        foreach($pegawai as $dt){ 
+                        foreach($pegawai as $dt){
                         ?>
                         <tr>
                           <th scope="row"><?php echo $no++; ?></th>
@@ -49,7 +49,9 @@
                           <td><?php echo $dt->satuan_kerja; ?></td>
                           <td>
                               <?php echo anchor('Pegawai/ProfilPegawai/'.$dt->nip,'<span class="glyphicon glyphicon-arrow-right" title="Detil Data"></span>'); ?>&nbsp;&nbsp;
+                              <?php if($level==1){ ?>
                               <?php echo anchor('Pegawai/EditPegawai/'.$dt->nip,'<span class="glyphicon glyphicon-pencil" title="Edit Data"></span>'); ?>
+                              <?php } ?>
                           </td>
                         </tr>
                         <?php } ?>
@@ -61,4 +63,3 @@
               </div>
           </div>
    </div>
-

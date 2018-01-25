@@ -25,9 +25,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <?php 
+                        <?php
                         $no = 1;
-                        foreach($pegawai as $dt){ 
+                        foreach($pegawai as $dt){
                             if($dt->status_profil==1){$status='<span class="glyphicon glyphicon-ok" title="OK"></span>';}else{$status='<span class="" title="Belum di Set"></span>';}
                         ?>
                         <tr>
@@ -51,7 +51,7 @@
                     <div id="response"></div>
                   </div>
                   <div class="clearfix"></div>
-                  
+
 <!-- MODAL INSERT PROFIL PEGAWAI -->
                   <div class="modal fade" id="addBookDialog" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Pendidikan Terakhir<span class="required">*</span></label>
@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                              
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Eselon<span class="required">*</span></label>
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                              
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Golongan<span class="required">*</span></label>
@@ -111,14 +111,27 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User Level<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="user_level" id="user_level" class="form-control col-md-7 col-xs-12" required>
+                                                 <option value="">-- Pilih --</option>
+                                                 <option value="2">Dosen</option>
+                                                 <option value="3">Pegawai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <br /><br />
                             <div class="line line-block"></div>
                             <div class="form-group">
                                 <h4 class="modal-title" id="myModalLabel">Kelompok Organisasi</h4>
                                 <hr />
                             </div>
-                             
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Organisasi<span class="required">*</span></label>
@@ -132,25 +145,25 @@
                                     </div>
                                 </div>
                             </div>
-                              
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_jabatan" id="id_jabatan" class="form-control col-md-7 col-xs-12 types" onchange="selunitkerja()">
                                             <option value="">- Pilih Jabatan  - </option>
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                                                        
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_unit_kerja" class="id_unit_kerja form-control col-md-7 col-xs-12" onchange="selsatuankerja()">
-                                            
-                                        </select> 
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -159,23 +172,23 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Satuan Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_satuan_kerja" id="unitkerja" class="id_unit_kerja unitkerja form-control col-md-7 col-xs-12" onchange="seljfu()">
-                                            
-                                        </select> 
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div id="row_dims" class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">JFU<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_jfu" id="id_jfu" class="form-control col-md-7 col-xs-12">
-                                            
-                                        </select> 
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <br />
                             <h3 class="alert-success" id="testDIV"></h3>
                             <div class="modal-footer">
@@ -243,13 +256,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">User Level<span class="required">*</span></label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select name="user_level" id="user_level" class="form-control col-md-7 col-xs-12" required>
+                                                 <option value="">-- Pilih --</option>
+                                                 <option value="2">Dosen</option>
+                                                 <option value="3">Pegawai</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <br /><br />
                             <div class="line line-block"></div>
+
                             <div class="form-group">
                                 <h4 class="modal-title" id="myModalLabel">Kelompok Organisasi</h4>
                                 <hr />
                             </div>
-                             
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Organisasi<span class="required">*</span></label>
@@ -263,50 +288,51 @@
                                     </div>
                                 </div>
                             </div>
-                              
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jabatan<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_jabatan" id="id_jabatan1" class="form-control col-md-7 col-xs-12 types1" onchange="selunitkerja1()">
                                             <option value="">- Pilih Jabatan  - </option>
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                                                        
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_unit_kerja" class="id_unit_kerja1 form-control col-md-7 col-xs-12" onchange="selsatuankerja1()">
-                                            
-                                        </select> 
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit Satuan Kerja<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="id_satuan_kerja" id="unitkerja1" class="id_unit_kerja unitkerja form-control col-md-7 col-xs-12" onchange="seljfu1()">
-                                            
-                                        </select> 
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div id="row_dims1" class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">JFU<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="id_jfu" id="id_jfu1" class="form-control col-md-7 col-xs-12">
+                                        <select name="id_jfu1" id="id_jfu1" class="form-control col-md-7 col-xs-12">
 
-                                        </select> 
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <br />
                             <h3 class="alert-info" id="testDIVs"></h3>
                             <div class="modal-footer">
@@ -320,7 +346,6 @@
                   </div>
                 </div>
               </div>
-            
+
           </div>
    </div>
-

@@ -17,8 +17,8 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <?php 
-                        foreach($pegawai as $key); 
+                    <?php
+                        foreach($pegawai as $key);
                         //foreach($views as $v);
                         if($key->jenis_kel==1){
                            $jk='Laki-Laki'; $sp='PNS';
@@ -26,7 +26,7 @@
                            $jk='Perempuan'; $sp='Pegawai Kontrak';
                         }
                         if($key->status_nikah==1){
-                           $sn='Menikah'; 
+                           $sn='Menikah';
                         }elseif($key->status_nikah==2){
                            $sn='Belum Menikah';
                         }elseif($key->status_nikah==3){
@@ -47,7 +47,7 @@
 
                       <ul class="list-unstyled user_data">
                         <li><i class="fa fa-neuter user-profile-icon"></i> <?php echo $key->nip; ?></li>
-                        
+
                         <li>
                           <i class="fa fa-map-marker user-profile-icon"></i> <?php echo $key->alamat; ?>
                         </li>
@@ -79,7 +79,7 @@
                         <li class="m-top-xs">
                           Status Pernikahan : <?php echo $sn; ?>
                         </li>
-                        
+
                       </ul>
                       <!-- end of skills -->
                       <br />
@@ -118,17 +118,21 @@
                                       <th>#</th>
                                       <th>Jabatan</th>
                                       <th>Tahun</th>
+                                      <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riw_jabatan as $dt){ 
+                                    foreach($riw_jabatan as $dt){
                                     ?>
                                     <tr>
                                       <th scope="row"><?php echo $no++; ?></th>
-                                      <td><?php echo $dt->nama_jabatan; ?></td>
-                                      <td><?php echo $dt->tahun; ?></td>
+                                      <td><?php echo $dt->jabatan_struktural; ?></td>
+                                      <td><?php echo $dt->Tahun; ?></td>
+                                      <td>
+                                          <?php echo anchor('Pegawai/HapusPegawai/'.$dt->id_riwayat_jabatan,'<span class="glyphicon glyphicon-remove" title="Hapus Data"></span>'); ?>
+                                      </td>
                                     </tr>
                                     <?php } ?>
                                   </tbody>
@@ -149,9 +153,9 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riw_pendidikan as $dt){ 
+                                    foreach($riw_pendidikan as $dt){
                                     ?>
                                     <tr>
                                       <th scope="row"><?php echo $no++; ?></th>
@@ -181,9 +185,9 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riw_diklat as $dt){ 
+                                    foreach($riw_diklat as $dt){
                                     ?>
                                     <tr>
                                         <th scope="row"><?php echo $no++; ?></th>
@@ -214,9 +218,9 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <?php 
+                                    <?php
                                     $no = 1;
-                                    foreach($riw_seminar as $dt){ 
+                                    foreach($riw_seminar as $dt){
                                     ?>
                                     <tr>
                                         <th scope="row"><?php echo $no++; ?></th>
@@ -240,8 +244,6 @@
                 </div>
               </div>
             </div>
-            
+
           </div>
    </div>
-
-   
