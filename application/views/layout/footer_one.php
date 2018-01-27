@@ -8,7 +8,8 @@
         <!-- /footer content -->
       </div>
     </div>
-
+  </div>
+</div>
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
@@ -25,7 +26,7 @@
        $(document).ready(function () {
        $.getJSON("<?php echo base_url(); ?>Dashboard/BarChart", function (result) {
            var chart = new CanvasJS.Chart("chartContainer", {
-              colorSet: "greenShades",
+              //colorSet: "greenShades",
                data: [
                        {
                            type: "bar",
@@ -39,7 +40,6 @@
                    chart.render();
                });
            });
-
    </script>
 
 </body>

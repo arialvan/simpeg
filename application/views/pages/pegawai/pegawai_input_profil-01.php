@@ -212,13 +212,13 @@
                           <h4 class="modal-title" id="myModalLabel">Update Profil Pegawai</h4>
                         </div>
                           <form class="contact-forms" method="post" >
-                            <?php //foreach($profil as $key); ?>
+                            <?php foreach($profil as $key); ?>
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">NIP<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input type="text" name="nip" id="bookIds" required="required" class="form-control col-md-7 col-xs-12">
-                                        <!-- <input type="text" name="nip" value="<?php //echo $key->nip; ?>" required="required" class="form-control col-md-7 col-xs-12"> -->
+                                        <!-- <input type="text" name="nip" id="bookIds" required="required" class="form-control col-md-7 col-xs-12"> -->
+                                        <input type="text" name="nip" value="<?php echo $key->nip; ?>" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                             </div>

@@ -42,7 +42,7 @@ var $acl;
 							array_push($data_points, $point);
 				    }
 						echo json_encode($data_points, JSON_NUMERIC_CHECK);
-
+						
         }
 
 //LOGOUT

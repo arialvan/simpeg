@@ -154,7 +154,7 @@ class M_master extends CI_Model{
         function M_insert_unitsatuankerja() {
             $msg = '<i class="fa fa-check text-success"></i> Simpan Data Berhasil';
             $data['satuan_kerja']   = $this->input->post('satuan_kerja', TRUE);
-            $query = $this->db->insert('tb_unit_kerja', $data);
+            $query = $this->db->insert('tb_satuan_kerja', $data);
             if($this->db->affected_rows() < 1 ){
                 $msg = '<i class="fa fa-close text-danger"></i> Simpan data gagal.';
             }

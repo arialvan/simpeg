@@ -20,7 +20,7 @@
                     <div class="col-xs-3">
                       <!-- required for floating -->
                       <!-- Nav tabs -->
-                      <ul class="nav nav-tabs tabs-left">
+                      <ul class="nav nav-tabs tabs-left" id="myTab">
                         <li class="active"><a href="#jabatan" data-toggle="tab">Jabatan Struktural</a></li>
                         <li><a href="#jfu" data-toggle="tab">JFU</a></li>
                         <li><a href="#unit" data-toggle="tab">Unit Organisasi</a></li>
@@ -204,6 +204,7 @@
                               <div class="form-group">
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                       <input type="text" name="unit_kerja" id="unit_kerja" required="required" class="form-control col-md-7 col-xs-12" placeholder="Masukan Nama Unit Kerja">
+                                      <input type="hidden" name="crashunit_kerja" value="#unitkerja">
                                  </div>
                               </div>
                               <div class="form-group">
@@ -238,7 +239,7 @@
                                       <?php //echo anchor('Pegawai/HapusPegawai/'.$j->id_jabatan,'<span class="glyphicon glyphicon-remove" title="Hapus Data"></span>'); ?>
                                     </td>
                                   </tr>
-                                   <?php } ?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -255,6 +256,7 @@
                               <div class="form-group">
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                       <input type="text" name="satuan_kerja" id="satuan_kerja" required="required" class="form-control col-md-7 col-xs-12" placeholder="Masukan Nama Unit Satuan Kerja">
+                                      <input type="hidden" name="crashsatuan_kerja" value="#unitsatuankerja">
                                  </div>
                               </div>
                               <div class="form-group">

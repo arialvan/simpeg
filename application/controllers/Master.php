@@ -90,13 +90,13 @@ public function index()
 				public function TambahUnitKerja(){
 						$query = $this->M_master->M_insert_unitkerja();
 						echo $query;
-						redirect('Master/');
+						redirect('Master/'.$this->input->post('crashunit_kerja'));
 				}
 /*PROSES TAMBAH UNIT SATUAN KERJA */
 				public function TambahUnitSatuanKerja(){
 						$query = $this->M_master->M_insert_unitsatuankerja();
 						echo $query;
-						redirect('Master/');
+						redirect('Master/'.$this->input->post('crashsatuan_kerja'));
 				}
 
 /*EDIT JABATAN STRUKTURAL */

@@ -255,4 +255,14 @@ function update_password($where,$data,$table){
         	$this->db->update($table,$data);
 }
 
+/*EDIT AND UPDATE PROFIL */
+function edit_profil($where,$table){
+    return $this->db->get_where($table,$where);
+}
+function update_profil($where,$data,$table){
+        	$this->db->where($where);
+        	$this->db->update($table,$data);
+}
+
+
 }

@@ -492,6 +492,27 @@ function UpdatePassword() {
       echo "Update Succes"; redirect('Dashboard','refresh');
 }
 
+function Success() {
+  echo "<h3 class='alert-success'>Update Success</h3>";
+}
+
+
+/*EDIT PROFIL */
+public function EditProfil($id) {
+			$data['name'] = $this->session->userdata('username');
+			$where = array('nip' => $id);
+			$data['profil'] = $this->M_pegawai->edit_profil($where, 'tb_pegawai_profil')->result();
+      $this->load->view('pages/pegawai/pegawai_modal_update',$data);
+      //var_dump($data);
+}
+
+function UpdateProfil() {
+			$data = array('password' => md5($this->input->post('password')));
+      $where = array('nip' => $this->input->post('nip'));
+      $this->M_pegawai->update_password($where, $data, 'tb_pegawai_profil');
+      echo "Update Succes"; redirect('Dashboard','refresh');
+}
+
 /*HAPUS PEGAWAI*/
 function HapusPegawai($id) {
     $where = array('nip' => $id);
