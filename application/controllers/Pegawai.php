@@ -513,6 +513,78 @@ function UpdateProfil() {
       echo "Update Succes"; redirect('Dashboard','refresh');
 }
 
+
+/*PROSES TAMBAH PROFIL DOSEN*/
+public function InputProfilDosen()
+{
+  if($this->session->userdata('user_level')==1)
+  {
+      $data['name'] = $this->session->userdata('username');
+      $data['pegawai'] = $this->M_pegawai->show_dosen_setting();
+      $data['eselon'] = $this->M_master->show_eselon();
+      $data['golongan'] = $this->M_master->show_golongan();
+      $data['fungsional'] = $this->M_master->show_jabatan_fungsional();
+      $data['kategori_dosen'] = $this->M_master->show_kategori_dosen();
+      $data['rumpun_ilmu'] = $this->M_master->show_rumpun_ilmu();
+      $data['pendidikan'] = $this->M_master->show_pendidikan();
+      $data['unit'] = $this->M_master->show_unit();
+      $data['unitkerja'] = $this->M_master->show_unit_kerja();
+      $data['nips'] = $this->M_master->show_prodi();
+
+      $data['title'] = 'Input Profil Pegawai';
+      $this->load->view('layout/header_datatables',$data);
+      $this->load->view('layout/side_menu');
+      $this->load->view('pages/pegawai/dosen_input_profil');
+      $this->load->view('layout/footer_datatables');
+  }else {
+      $data['name'] = $this->session->userdata('username');
+      $this->load->view('layout/header',$data);
+      $this->load->view('layout/side_menu');
+      $this->load->view('pages/error.php');
+      $this->load->view('layout/footer');
+  }
+}
+
+function InsertProfilDosen() {
+//Insert tabel profil dosen
+$data = array(
+            'nip' => $this->input->post('nip'),
+            'nidn' => $this->input->post('nidn'),
+            's1' => $this->input->post('s1')."#".$this->input->post('ket_s1'),
+            's2' => $this->input->post('s2')."#".$this->input->post('ket_s2'),
+            's3' => $this->input->post('s3')."#".$this->input->post('ket_s3'),
+            'no_sertifikat' => $this->input->post('no_sertifikat'),
+            'id_jf' => $this->input->post('id_jf'),
+            'id_kat_dosen' => $this->input->post('id_kat_dosen'),
+            'id_ilmu' => $this->input->post('id_ilmu'),
+            'id_eselon' => $this->input->post('id_eselon'),
+            'id_gol' =>  $this->input->post('id_gol'),
+            'id_unit' =>  $this->input->post('id_unit'),
+            'id_unit_kerja' =>  $this->input->post('id_unit_kerja'),
+            'hp' =>  $this->input->post('hp'),
+            'email' =>  $this->input->post('email'),
+            'ketua_prodi' =>  $this->input->post('ketua_prodi'),
+            'assesor_1' =>  $this->input->post('assesor_1'),
+            'assesor_2' =>  $this->input->post('assesor_2'),
+            'password' =>  md5($this->input->post('password')),
+            'user_level' => $this->input->post('user_level')
+        );
+        // var_dump($data);
+        $this->M_pegawai->insert_profil_dosen($data, 'profil_dosen');
+
+  //Update tabel pegawai
+  $data1 = array(
+                  'nidn' => $this->input->post('nidn'),
+                  'status_profil' => 1
+                );
+  $where = array('nip' => $this->input->post('nip'));
+  $this->M_pegawai->update_pegawai($where, $data1, 'tb_pegawai');
+  // var_dump($data1);
+
+  echo 'Insert Success';
+}
+
+
 /*HAPUS PEGAWAI*/
 function HapusPegawai($id) {
     $where = array('nip' => $id);

@@ -22,6 +22,21 @@ class M_master extends CI_Model{
         $query = $this->db->get('tb_jabatan_struktural')->result();
         return $query;
     }
+/*JABATAN FUNGSIONAL*/
+    function show_jabatan_fungsional(){
+        $query = $this->db->get('master_jabatan_fungsional')->result();
+        return $query;
+    }
+/*KATEGORI DOSEN*/
+    function show_kategori_dosen(){
+        $query = $this->db->get('master_kategori_dosen')->result();
+        return $query;
+    }
+/*RUMPUN ILMU*/
+    function show_rumpun_ilmu(){
+        $query = $this->db->get('master_rumpun_ilmu')->result();
+        return $query;
+    }
 /*UNIT*/
     function show_unit(){
         $query = $this->db->get('tb_unit')->result();
@@ -56,6 +71,16 @@ class M_master extends CI_Model{
 /*Mapel*/
     function show_mapel(){
         $query = $this->db->get('tb_mapel')->result();
+        return $query;
+    }
+
+/*Cari Dosen*/
+    function show_prodi(){
+        $this->db->select('nip,nama_peg,status_profesi,status_peg')
+                 ->from('tb_pegawai')
+                 ->where('nip !=', 007)
+                 ->where('status_profesi =', 2);
+        $query = $this->db->get()->result();
         return $query;
     }
 

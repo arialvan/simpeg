@@ -29,7 +29,8 @@
                   <li><a><i class="fa fa-user-plus"></i>Pegawai<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url() ?>Pegawai/FormPegawai">Insert Pegawai</a></li>
-                      <li><a href="<?php echo base_url() ?>Pegawai/InputProfilPegawai">Insert Profil</a></li>
+                      <li><a href="<?php echo base_url() ?>Pegawai/InputProfilPegawai">Insert Profil Pegawai</a></li>
+                      <li><a href="<?php echo base_url() ?>Pegawai/InputProfilDosen">Insert Profil Dosen</a></li>
                       <li><a href="<?php echo base_url() ?>Import">Import Excel</a></li>
                     </ul>
                   </li>

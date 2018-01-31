@@ -13,7 +13,6 @@
     <script src="<?php echo base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="<?php echo base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/vendors/bootstrap3-editable/js/bootstrap-editable.js"></script>
    <!-- Datatables -->
     <script src="<?php echo base_url(); ?>assets/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -25,42 +24,64 @@
     <script src="<?php echo base_url(); ?>assets/vendors/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="<?php echo base_url(); ?>assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url(); ?>assets/build/js/custom.min.js"></script>
 
-    <script>
-        //Modal Insert Profil Pegawai
-          $(document).on("click", ".open-AddBookDialog", function () {
-                var myBookId = $(this).data('id');
-                $(".modal-body #bookId").val( myBookId );
-               $('#addBookDialog').modal('show');
-           });
-        //Modal Update Profil Pegawai
-           $(document).on("click", ".open-AddBookDialogs", function () {
-                var myBookId = $(this).data('id');
-               $(".modal-body #bookIds").val( myBookId );
-               $('#addBookDialogs').modal('show');
-           });
+<script>
+//Modal Insert Profil Pegawai
+  $(document).on("click", ".open-AddBookDialog", function () {
+        var myBookId = $(this).data('id');
+        $(".modal-body #bookId").val( myBookId );
+       $('#addBookDialog').modal('show');
+   });
+//Modal Update Profil Pegawai
+   $(document).on("click", ".open-AddBookDialogs", function () {
+        var myBookId = $(this).data('id');
+       $(".modal-body #bookIds").val( myBookId );
+       $('#addBookDialogs').modal('show');
+   });
 
-        //Ajax Insert
-        function saveToDB()
-            {
-                console.log('Saving to the db');
-                form = $('.contact-form');
-                    $.ajax({
-                            url: "<?php echo base_url(); ?>Pegawai/InsertProfilPegawai",
-                            type: "POST",
-                            data: form.serialize(),
-                            success: function (response) {
-                                $("#testDIV").html(response);
-                                document.location.reload();
-                            },
-                    });
-            }
-            $('.contact-form').submit(function(e) {
-                    saveToDB();
-                    e.preventDefault();
+//INSERT PEGAWAI
+function saveToDB()
+    {
+        console.log('Saving to the db');
+        form = $('.contact-form');
+            $.ajax({
+                    url: "<?php echo base_url(); ?>Pegawai/InsertProfilPegawai",
+                    type: "POST",
+                    data: form.serialize(),
+                    success: function (response) {
+                        $("#testDIV").html(response);
+                        document.location.reload();
+                    },
             });
+    }
+    $('.contact-form').submit(function(e) {
+            saveToDB();
+            e.preventDefault();
+    });
+
+
+//INSERT DOSEN
+function saveToDB()
+    {
+        console.log('Saving to the db');
+        form = $('.savedosen');
+            $.ajax({
+                    url: "<?php echo base_url(); ?>Pegawai/InsertProfilDosen",
+                    type: "POST",
+                    data: form.serialize(),
+                    success: function (response) {
+                        $("#testDIV").html(response);
+                        document.location.reload();
+                    },
+            });
+    }
+    $('.savedosen').submit(function(e) {
+            saveToDB();
+            e.preventDefault();
+    });
 
 // Dropdown Insert
         function seljabatan()
@@ -116,6 +137,33 @@
                         });
         }
 
+// Dropdown Insert
+      function selunit()
+      {
+         var state=$('#id_unit').val();
+              $.post('<?php echo base_url();?>Pegawai/ambil_jabatan/',
+              {
+                  state:state
+              },
+                  function(data)
+                      {
+                          $('#id_jabatan').html(data);
+                      //$('#id_unit_kerja').html(data);
+                      });
+      }
+
+      function selunitkerja()
+      {
+         var state=$('#id_jabatan').val();
+              $.post('<?php echo base_url();?>Pegawai/ambil_unitkerja/',
+                  {
+                      state:state
+                  },
+                  function(data)
+                      {
+                          $('.id_unit_kerja').html(data);
+                      });
+      }
 
 // Hide-Unhide /Controllers/Pegawai/SetOrganisasi
         $(function() {
@@ -249,6 +297,21 @@
                             e.preventDefault();
                 });
 
+                $(function() {
+                    $('#ms').change(function() {
+                        console.log($(this).val());
+                    }).multipleSelect({
+                        width: '100%'
+                    });
+                });
+
+  //Select Ketua Prodi
+              $(document).ready(function(){
+                $('.selectpicker').selectpicker({
+                  style: 'btn-info',
+                  size: 4
+                });
+              });
     </script>
   </body>
 </html>

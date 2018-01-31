@@ -22,7 +22,7 @@ class M_pegawai extends CI_Model{
 
     }
 
-/*PEGAWAI*/
+/*PEGAWAI ALL*/
     function show_pegawai(){
       $this->db->select('*')
                       ->from('tb_pegawai')
@@ -32,10 +32,22 @@ class M_pegawai extends CI_Model{
       return $query;
     }
 
+/* INSERT PROFIL PEGAWAI */
     function show_pegawai_setting(){
         $this->db->select('nip,nama_peg,status_peg,status_profesi,status_profil')
                  ->from('tb_pegawai')
-                 ->where('nip !=', 007);
+                 ->where('nip !=', 007)
+                 ->where('status_profesi !=', 2);
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
+/* INSERT PROFIL DOSEN */
+    function show_dosen_setting(){
+        $this->db->select('nip,nama_peg,status_peg,status_profesi,status_profil')
+                 ->from('tb_pegawai')
+                 ->where('nip !=', 007)
+                 ->where('status_profesi =', 2);
         $query = $this->db->get()->result();
         return $query;
     }
@@ -82,6 +94,10 @@ class M_pegawai extends CI_Model{
 
 /*INSERT PROFIL PEGAWAI*/
     function insert_profil_pegawai($data,$table) {
+        $this->db->insert($table, $data);
+    }
+/*INSERT PROFIL DOSEN*/
+    function insert_profil_dosen($data,$table) {
         $this->db->insert($table, $data);
     }
 /*EDIT PEGAWAI*/
